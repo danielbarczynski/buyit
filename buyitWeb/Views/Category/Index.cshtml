@@ -1,1 +1,30 @@
-﻿<h1>Category</h1>
+@model IEnumerable<Category>
+
+<h1>Category</h1>
+@*<div class="createButton mt-4 mb-2">
+    <a>+ Create new</a>
+</div>*@
+
+<partial name="CreatePartial" model="null"/>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Category Name</th>
+            <th>Display Order</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Order</td>
+                <td>@item.CreatedDateTime</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<span>hey</span>
