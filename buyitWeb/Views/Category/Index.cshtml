@@ -3,16 +3,19 @@
 <h1>Category</h1>
 @*<div class="createButton mt-4 mb-2">
     <a>+ Create new</a>
-</div>*@
+    </div>*@
 
-<partial name="CreatePartial" model="null"/>
+<br />
 
-<table class="table table-striped">
+<partial name="_CreatePartial" model="null" />
+
+<table class="table table-striped mt-2">
     <thead>
         <tr>
             <th>Category Name</th>
             <th>Display Order</th>
             <th>Time</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -22,9 +25,18 @@
                 <td>@item.Name</td>
                 <td>@item.Order</td>
                 <td>@item.CreatedDateTime</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@item.Id">
+                        <button type="submit" >Delete</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
-<span>hey</span>
+@section Scripts{
+@{
+    <partial name="_ValidationScriptsPartial" />
+}
+}

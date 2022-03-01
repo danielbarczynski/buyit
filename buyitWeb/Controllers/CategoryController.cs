@@ -30,5 +30,14 @@ namespace buyitWeb.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(Category category)
+        {
+            _applicationDbContext.Remove(category);
+            await _applicationDbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }
