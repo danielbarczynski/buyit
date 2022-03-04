@@ -14,9 +14,12 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #d9e3f1;
+    color: #7b8ab8;
 }
 
-a{
+a {
     text-decoration: none;
+    color: grey;
 }
