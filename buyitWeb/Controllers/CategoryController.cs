@@ -1,31 +1,33 @@
 ﻿using buyitWeb.Data;
 using buyitWeb.Models;
+using buyitWeb.Repository;
+using buyitWeb.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace buyitWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _applicationDbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryController(ApplicationDbContext applicationDbContext)
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _applicationDbContext = applicationDbContext;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            IEnumerable<Category> category = _applicationDbContext.Categories; // no need for ToList(), wow
+            IEnumerable<Category> category = _unitOfWork.Category.GetAll(); // no need for ToList(), wow
             return View(category);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Category category)
+        public IActionResult Create(Category category)
         {
             if (ModelState.IsValid)
             {
-                _applicationDbContext.Add(category);
-                await _applicationDbContext.SaveChangesAsync();
+                _unitOfWork.Category.Add(category);
+                _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
@@ -33,10 +35,10 @@ namespace buyitWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(Category category)
+        public IActionResult Delete(Category category)
         {
-            _applicationDbContext.Remove(category);
-            await _applicationDbContext.SaveChangesAsync();
+            _unitOfWork.Category.Remove(category);
+            _unitOfWork.Save();
             return RedirectToAction("Index");
         }
     }
