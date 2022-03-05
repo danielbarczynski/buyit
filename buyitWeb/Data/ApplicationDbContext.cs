@@ -12,5 +12,6 @@ namespace buyitWeb.Data
         }
         public DbSet<CategoryModel> Categories { get; set; }
         public DbSet<CoverTypeModel> CoverTypes { get; set; }
+        public DbSet<BookModel> Books { get; set; }
     }
 }

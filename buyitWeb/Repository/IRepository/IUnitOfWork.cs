@@ -6,6 +6,7 @@ namespace buyitWeb.Repository
     {
         ICategory Category { get; }
         ICoverType CoverType { get; }
+        IBook Book { get; }
         void Save();
     }
 }
