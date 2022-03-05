@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace buyitWeb.Controllers
 {
+    [Area("Admin")]
     public class CoverTypeController : Controller
     {
         [BindProperty]
