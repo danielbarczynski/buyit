@@ -10,7 +10,7 @@ namespace buyitWeb.Data
             : base(options)
         {
         }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<CoverType> CoverTypes { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<CoverTypeModel> CoverTypes { get; set; }
     }
 }

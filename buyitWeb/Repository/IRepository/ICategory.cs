@@ -2,7 +2,7 @@
 
 namespace buyitWeb.Repository.IRepository
 {
-    public interface ICategory : IRepository<Category>
+    public interface ICategory : IRepository<Models.CategoryModel>
     {
     }
 }

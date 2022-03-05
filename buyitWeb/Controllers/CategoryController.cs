@@ -16,13 +16,13 @@ namespace buyitWeb.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Category> category = _unitOfWork.Category.GetAll(); // no need for ToList(), wow
+            IEnumerable<Models.CategoryModel> category = _unitOfWork.Category.GetAll(); // no need for ToList(), wow
             return View(category);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category category)
+        public IActionResult Create(Models.CategoryModel category)
         {
             if (ModelState.IsValid)
             {
@@ -35,7 +35,7 @@ namespace buyitWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(Category category)
+        public IActionResult Delete(Models.CategoryModel category)
         {
             _unitOfWork.Category.Remove(category);
             _unitOfWork.Save();

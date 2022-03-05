@@ -4,10 +4,10 @@ using buyitWeb.Repository.IRepository;
 
 namespace buyitWeb.Repository
 {
-    public class CategoryRepository : Repository<Category>, ICategory
+    public class Category : Repository<Models.CategoryModel>, ICategory
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        public CategoryRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
+        public Category(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }

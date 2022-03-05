@@ -9,9 +9,11 @@ namespace buyitWeb.Repository
         public UnitOfWork(ApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
-            Category = new CategoryRepository(_applicationDbContext);
+            Category = new Category(_applicationDbContext);
+            CoverType = new CoverType(_applicationDbContext);
         }
         public ICategory Category { get; private set; }
+        public ICoverType CoverType { get; private set; }
 
         public void Save()
         {

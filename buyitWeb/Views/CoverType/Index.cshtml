@@ -1,20 +1,18 @@
-@model IEnumerable<CategoryModel>
+﻿@model IEnumerable<CoverTypeModel>
 
-<h1>Category</h1>
+<h1>CoverType</h1>
 @*<div class="createButton mt-4 mb-2">
     <a>+ Create new</a>
     </div>*@
 
 <br />
 
-<partial name="_CreatePartial" model="null" />
+<partial name="_CreateCoverPartial" model="null" />
 
 <table class="table table-striped mt-2">
     <thead>
         <tr>
-            <th>Category Name</th>
-            <th>Display Order</th>
-            <th>Time</th>
+            <th>Cover Type Name</th>
             <th></th>
         </tr>
     </thead>
@@ -23,8 +21,6 @@
         {
             <tr>
                 <td>@item.Name</td>
-                <td>@item.Order</td>
-                <td>@item.CreatedDateTime</td>
                 <td>
                     <form asp-action="Delete" asp-route-id="@item.Id">
                         <button type="submit" >Delete</button>
