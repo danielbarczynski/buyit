@@ -1,0 +1,42 @@
+﻿@model buyitWeb.Models.ViewModels.BookVM
+
+<form asp-action="Create">
+    Title:   
+    <br />
+    <input class="col-2" asp-for="BookModel.Title" /> 
+     <br />
+     Category:
+     <br />
+     <select asp-for="BookModel.CategoryId" asp-items="@Model.Categories" class="col-2">
+         <option disabled selected></option>
+     </select>
+     <br />
+     Cover:
+     <br />
+     <select asp-for="BookModel.CoverTypeId" asp-items="@Model.Covers" class="col-2">
+         <option disabled selected></option>
+     </select>
+     <br />
+     Description:
+     <br />
+     <textarea class="col-2" rows="3" asp-for="BookModel.Description"></textarea>
+     <br />
+    Author:
+    <br />
+    <input class="col-2" asp-for="BookModel.Author" />
+     <br />
+    Price:
+    <br />
+    <input class="col-2" asp-for="BookModel.Price" />
+     <br />
+    List price:
+    <br />
+    <input class="col-2" asp-for="BookModel.ListPrice" />
+    <br />
+    ISBN:
+    <br />
+    <input class="col-2" asp-for="BookModel.ISBN" />
+     <br />
+     <a asp-action="Index">Back</a>
+    <button class="mt-2" type="submit">Create</button>
+</form>

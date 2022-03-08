@@ -1,4 +1,10 @@
-﻿<h1>Books</h1>
+﻿@model IEnumerable<BookModel>
+
+<h1>Books</h1>
+
+<div>
+   <a asp-action="Create"> +Create new</a>
+</div>
 
 <table class="table table-striped mt-2">
     <thead>
@@ -8,7 +14,6 @@
             <th>Price</th>
             <th>Category</th>
             <th>ISBN</th>
-            <th></th>
         </tr>
     </thead>
 </table>

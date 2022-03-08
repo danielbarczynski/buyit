@@ -1,6 +1,8 @@
 ﻿using buyitWeb.Models;
+using buyitWeb.Models.ViewModels;
 using buyitWeb.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace buyitWeb.Controllers
 {
@@ -21,10 +23,31 @@ namespace buyitWeb.Controllers
             IEnumerable<BookModel> coverTypes = _unitOfWork.Book.GetAll();
             return View(coverTypes);
         }
-
-        [HttpPost]
         public IActionResult Create()
         {
+            BookVM bookVM = new BookVM()
+            {
+                BookModel = new BookModel(),
+                Categories = _unitOfWork.Category.GetAll().Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString(),
+                }),
+                Covers = _unitOfWork.CoverType.GetAll().Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString(),
+                }),
+            };
+            //ViewBag.categories = categories;
+            //ViewBag.covers = covers;
+            return View(bookVM);
+        }
+
+        [HttpPost]
+        public IActionResult Create(BookModel bookModel)
+        {
+
             _unitOfWork.Book.Add(bookModel);
             _unitOfWork.Save();
             return RedirectToAction("Index");
