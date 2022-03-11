@@ -19,7 +19,7 @@ function loadDataTable() {
                 "data": "id",
                 "render": function (data) {
                     return `
-                        <a class="btn btn-info" onClick=Delete('/Admin/Book/Delete/${data}')>Delete</a>
+                        <button onClick=Delete('/Admin/Book/Delete/${data}')>Delete</buttton>
                         `
                 },
                 "width": "15%"
