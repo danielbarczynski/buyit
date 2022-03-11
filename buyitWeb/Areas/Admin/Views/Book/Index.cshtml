@@ -1,25 +1,22 @@
-﻿@model IEnumerable<BookModel>
-
-<h1>Books</h1>
+﻿<h1>Books</h1>
 
 <div>
    <a asp-action="Create"> +Create new</a>
 </div>
 
-<table class="table table-striped mt-2">
+<table id="tblData" class="table table-striped mt-2">
     <thead>
         <tr>
             <th>Title</th>
             <th>Author</th>
             <th>Price</th>
-            <th>Category</th>
             <th>ISBN</th>
+            <th>Category</th>
+            <th>Actions</th>
         </tr>
     </thead>
 </table>
 
 @section Scripts{
-@{
-    <partial name="_ValidationScriptsPartial" />
-}
+    <script src="~/js/book.js"></script>
 }
