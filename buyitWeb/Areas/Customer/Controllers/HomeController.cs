@@ -23,6 +23,16 @@ namespace buyitWeb.Controllers
             return View(bookModel);
         }
 
+        //public IActionResult Index(int id)
+        //{
+        //    CartModel bookModel = new CartModel()
+        //    {
+        //        Count = 1,
+        //        BookModel = _unitOfWork.Book.GetFirstOrDefault(u => u.Id == id, properties: "Category,CoverType"),
+        //    };
+        //    return View(bookModel);
+        //}
+
         public IActionResult Privacy()
         {
             return View();

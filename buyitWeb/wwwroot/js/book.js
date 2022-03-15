@@ -11,10 +11,10 @@ function loadDataTable() {
         },
         "columns": [
             { "data": "title", "width": "15%" },
-            { "data": "isbn", "width": "15%" },
-            { "data": "price", "width": "15%" },
             { "data": "author", "width": "15%" },
             { "data": "category.name", "width": "15%" },
+            { "data": "isbn", "width": "15%" },
+            { "data": "price", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
@@ -45,10 +45,6 @@ function Delete(url) {
                 success: function (data) {
                     if (data.success) {
                         dataTable.ajax.reload();
-                        toastr.success(data.message);
-                    }
-                    else {
-                        toastr.error(data.message);
                     }
                 }
             })
