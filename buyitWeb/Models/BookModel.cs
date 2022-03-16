@@ -15,15 +15,6 @@ namespace buyitWeb.Models
         [Required]
         [Range(1, 10000)]
         public double Price { get; set; }
-        [Required]
-        [Range(1, 10000)]
-        public double ListPrice { get; set; }
-        [Required]
-        [Range(1, 10000)]
-        public double Price30 { get; set; }
-        [Required]
-        [Range(1, 10000)]
-        public double Price70 { get; set; }
         public string ImageUrl { get; set; }
         [Required]
         public int CategoryId { get; set; }
