@@ -1,1 +1,21 @@
-﻿
+﻿@model buyitWeb.Models.ViewModels.CartVM
+
+<h1>Cart</h1>
+
+@foreach (var item in Model.Cart)
+{
+    <div class="row mb-3">
+        <div class="col-2">
+            <img src="@item.BookModel.ImageUrl" class="w-75" />
+        </div>
+        <div class="col-4 h3 p-4">
+            Title: @item.BookModel.Title
+            <br />
+            Price: @item.BookModel.Price
+            <br />
+            Quantity: @item.Count
+            <br /><br />
+            Total price: 
+        </div>
+    </div>
+}
