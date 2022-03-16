@@ -14,5 +14,6 @@ namespace buyitWeb.Data
         public DbSet<CoverTypeModel> CoverTypes { get; set; }
         public DbSet<BookModel> Books { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<CartModel> Cart{ get; set; }
     }
 }

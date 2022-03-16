@@ -2,26 +2,32 @@
 
 
 <div class="row pb-3">
-	@foreach(var book in Model)
-	{
-		<div class="col-lg-3">
-			<div class="row p-2">
-				<div class="col-12 p-1" >
-					<div class="card">
-						<img src="@book.ImageUrl" class="card-img-top rounded" style="min-height:452px"/>
+    @foreach (var book in Model)
+    {
+        <div class="col-lg-3">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card">
+                        <a  asp-controller="Home" asp-action="Details" asp-route-id="@book.Id" ><img src="@book.ImageUrl" class="card-img-top rounded" style="min-height:452px" /></a>
 
-						<div class="card-body">
-						<div class="pl-1">
-							<p><h3>@book.Title</h3></p>
-							<p>Author: <b>@book.Author</b></p>
-						</div>
-						<div class="pl-1">
-							<p>Price: <b>@book.Price.ToString("0.00") PLN</b></p>
-						</div>						
-						</div>
-					</div>
-				</div> 
-			</div>
-		</div>
-	}
+                        <div class="card-body">
+                            <div class="pl-1">
+                                <p><h3>@book.Title</h3></p>
+                                <p>Author: <b>@book.Author</b></p>
+                            </div>
+                            <div class="pl-1">
+                                <p>Price: <b>@book.Price.ToString("0.00") PLN</b></p>
+                            </div>
+                 @*           <form asp-controller="Home" asp-action="Add">                             
+                                <div class="text-center h5">
+                                    <button type="submit">Add to Cart</button>
+                                </div>
+                            </form>*@
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>

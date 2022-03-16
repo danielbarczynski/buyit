@@ -2,6 +2,7 @@
 using buyitWeb.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace buyitWeb.Controllers
 {
@@ -42,6 +43,31 @@ namespace buyitWeb.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Details(int id)
+        {
+            CartModel cartObj = new()
+            {
+                Count = 1,
+                BookModelId = id,
+                BookModel = _unitOfWork.Book.GetFirstOrDefault(u => u.Id == id, properties: "Category,CoverType"),
+            };
+
+            return View(cartObj);
+        }
+
+        [HttpPost]
+        public IActionResult Add(CartModel cartModel, int id)
+        {
+
+            //var claimsIdentity = (ClaimsIdentity)User.Identity;
+            //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            //cartModel.ApplicationUserId = claim.Value;
+
+            _unitOfWork.Cart.Add(cartModel);
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

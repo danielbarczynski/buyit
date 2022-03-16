@@ -1,0 +1,31 @@
+﻿@model CartModel
+<div class="container ">
+    <div class="col-8 row">
+        <img src="@Model.BookModel.ImageUrl" class="w-50" />
+        <div class="col-6 h3 ">
+            Title: @Model.BookModel.Title
+            <br />
+            Author: @Model.BookModel.Author
+            <br />
+            Price: @Model.BookModel.Price
+            <br />
+            ISBN: @Model.BookModel.ISBN
+            <br />
+            Category: @Model.BookModel.Category.Name
+            <br />
+            Cover: @Model.BookModel.CoverType.Name
+            <br />
+            Description: 
+            <br />
+            @Model.BookModel.Description
+
+            <div>
+                <div class="mt-5 h4">
+                    <a asp-action="Index">Back</a>
+                    <button>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
