@@ -1,35 +1,38 @@
 ﻿@model CartModel
 <form asp-action="Add">
     <div class="container ">
-        <div class="col-8 row">
-            <img src="@Model.BookModel.ImageUrl" class="w-50" />
-            <div class="col-6 h3">
+        <div class="row">
+            <div class="col">
+            <img src="@Model.BookModel.ImageUrl" class="w-75" />
+            </div>
+            <div class="col-7 h3">
+
                 <input type="hidden" asp-for="BookModelId" />
-                Title: @Model.BookModel.Title
+                <b>Title: </b>@Model.BookModel.Title
                 <br />
-                Author: @Model.BookModel.Author
+                <b>Author: </b> @Model.BookModel.Author
                 <br />
-                Price: @Model.BookModel.Price
+                <b>Price: </b> @Model.BookModel.Price
                 <br />
-                ISBN: @Model.BookModel.ISBN
+                <b>ISBN: </b> @Model.BookModel.ISBN
                 <br />
-                Category: @Model.BookModel.Category.Name
+                <b>Category: </b>@Model.BookModel.Category.Name
                 <br />
-                Cover: @Model.BookModel.CoverType.Name
+                <b>Cover: </b>@Model.BookModel.CoverType.Name
                 <br />
-                Description:
-                <br />
+                <b>Description:</b>
                 @Model.BookModel.Description
                 <div>
-                    <div class="mt-5 h4">
-                        <div>
-                            Count: 
+                    <div class="mt-5 h4 shoppingcart">
+                     
+                            Count:
                             <input class="col-3" asp-for="Count" />
-                        </div>
-                        <div class="mt-2">
-                            <a asp-action="Index">Back</a>
+                
+                      
+                       
                             <button type="submit">Add to Cart</button>
-                        </div>
+                      
+                             <a asp-action="Index">Back</a>
                     </div>
                 </div>
             </div>

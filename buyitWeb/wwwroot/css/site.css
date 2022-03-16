@@ -23,3 +23,8 @@ a {
     text-decoration: none;
     color: grey;
 }
+
+.shoppingcart {
+    position: absolute;
+    bottom: 28%;
+}
