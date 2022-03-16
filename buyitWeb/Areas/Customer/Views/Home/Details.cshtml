@@ -1,31 +1,39 @@
 ﻿@model CartModel
-<div class="container ">
-    <div class="col-8 row">
-        <img src="@Model.BookModel.ImageUrl" class="w-50" />
-        <div class="col-6 h3 ">
-            Title: @Model.BookModel.Title
-            <br />
-            Author: @Model.BookModel.Author
-            <br />
-            Price: @Model.BookModel.Price
-            <br />
-            ISBN: @Model.BookModel.ISBN
-            <br />
-            Category: @Model.BookModel.Category.Name
-            <br />
-            Cover: @Model.BookModel.CoverType.Name
-            <br />
-            Description: 
-            <br />
-            @Model.BookModel.Description
-
-            <div>
-                <div class="mt-5 h4">
-                    <a asp-action="Index">Back</a>
-                    <button>Add to Cart</button>
+<form asp-action="Add">
+    <div class="container ">
+        <div class="col-8 row">
+            <img src="@Model.BookModel.ImageUrl" class="w-50" />
+            <div class="col-6 h3">
+                <input type="hidden" asp-for="BookModelId" />
+                Title: @Model.BookModel.Title
+                <br />
+                Author: @Model.BookModel.Author
+                <br />
+                Price: @Model.BookModel.Price
+                <br />
+                ISBN: @Model.BookModel.ISBN
+                <br />
+                Category: @Model.BookModel.Category.Name
+                <br />
+                Cover: @Model.BookModel.CoverType.Name
+                <br />
+                Description:
+                <br />
+                @Model.BookModel.Description
+                <div>
+                    <div class="mt-5 h4">
+                        <div>
+                            Count: 
+                            <input class="col-3" asp-for="Count" />
+                        </div>
+                        <div class="mt-2">
+                            <a asp-action="Index">Back</a>
+                            <button type="submit">Add to Cart</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
+</form>

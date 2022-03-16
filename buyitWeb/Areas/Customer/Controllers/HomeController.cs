@@ -45,29 +45,29 @@ namespace buyitWeb.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int bookId)
         {
             CartModel cartObj = new()
             {
                 Count = 1,
-                BookModelId = id,
-                BookModel = _unitOfWork.Book.GetFirstOrDefault(u => u.Id == id, properties: "Category,CoverType"),
+                BookModelId = bookId,
+                BookModel = _unitOfWork.Book.GetFirstOrDefault(u => u.Id == bookId, properties: "Category,CoverType"),
             };
 
             return View(cartObj);
         }
 
         [HttpPost]
-        public IActionResult Add(CartModel cartModel, int id)
+        public IActionResult Add(CartModel cartModel)
         {
 
-            //var claimsIdentity = (ClaimsIdentity)User.Identity;
-            //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            //cartModel.ApplicationUserId = claim.Value;
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            cartModel.ApplicationUserId = claim.Value;
 
             _unitOfWork.Cart.Add(cartModel);
             _unitOfWork.Save();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
     }
 }
