@@ -1,18 +1,20 @@
 ﻿@model CartModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
 <form asp-action="Add">
     <div class="container ">
         <div class="row">
             <div class="col">
-            <img src="@Model.BookModel.ImageUrl" class="w-75" />
+                <img src="@Model.BookModel.ImageUrl" class="w-75" />
             </div>
             <div class="col-7 h3">
-
                 <input type="hidden" asp-for="BookModelId" />
                 <b>Title: </b>@Model.BookModel.Title
                 <br />
-                <b>Author: </b> @Model.BookModel.Author
+                <b>Author: </b>@Model.BookModel.Author
                 <br />
-                <b>Price: </b> @Model.BookModel.Price
+                <b>Price: </b>@Model.BookModel.Price
                 <br />
                 <b>ISBN: </b> @Model.BookModel.ISBN
                 <br />
@@ -24,19 +26,16 @@
                 @Model.BookModel.Description
                 <div>
                     <div class="mt-5 h4 shoppingcart">
-                     
-                            Count:
-                            <input class="col-3" asp-for="Count" />
-                
-                      
-                       
+                        Count:
+                        <input class="col-3" asp-for="Count" />
+                   
                             <button type="submit">Add to Cart</button>
-                      
-                             <a asp-action="Index">Back</a>
+                        
+
+                        <a asp-action="Index">Back</a>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </form>

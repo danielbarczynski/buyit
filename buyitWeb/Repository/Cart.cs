@@ -13,16 +13,16 @@ namespace buyitWeb.Repository
             ;
         }
 
-        public int DecrementCount(CartModel shoppingCart, int count)
+        public int DecrementCount(CartModel cartModel, int count)
         {
-            shoppingCart.Count -= count;
-            return shoppingCart.Count;
+            cartModel.Count -= count;
+            return cartModel.Count;
         }
 
-        public int IncrementCount(CartModel shoppingCart, int count)
+        public int IncrementCount(CartModel cartModel, int count)
         {
-            shoppingCart.Count += count;
-            return shoppingCart.Count;
+            cartModel.Count += count;
+            return cartModel.Count;
         }
     }
 }

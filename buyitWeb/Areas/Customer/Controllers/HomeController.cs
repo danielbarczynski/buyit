@@ -1,5 +1,6 @@
 ﻿using buyitWeb.Models;
 using buyitWeb.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -56,7 +57,7 @@ namespace buyitWeb.Controllers
 
             return View(cartObj);
         }
-
+        [Authorize]
         [HttpPost]
         public IActionResult Add(CartModel cartModel)
         {
@@ -65,8 +66,19 @@ namespace buyitWeb.Controllers
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             cartModel.ApplicationUserId = claim.Value;
 
-            _unitOfWork.Cart.Add(cartModel);
-            _unitOfWork.Save();
+            CartModel cartFromDb = _unitOfWork.Cart.GetFirstOrDefault(
+     u => u.ApplicationUserId == claim.Value && u.BookModelId == cartModel.BookModelId);
+
+            if (cartFromDb == null)
+            {
+                _unitOfWork.Cart.Add(cartModel);
+                _unitOfWork.Save();
+            }
+            else
+            {
+                _unitOfWork.Cart.IncrementCount(cartFromDb, cartModel.Count);
+                _unitOfWork.Save();
+            }
             return RedirectToAction("Index");
         }
     }
