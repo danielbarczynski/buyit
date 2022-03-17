@@ -15,5 +15,7 @@ namespace buyitWeb.Data
         public DbSet<BookModel> Books { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<CartModel> Cart{ get; set; }
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }
