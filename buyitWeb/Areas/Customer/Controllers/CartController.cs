@@ -33,6 +33,7 @@ namespace buyitWeb.Areas.Customer.Controllers
                 CartVM.CartTotal += (cart.Count * cart.BookModel.Price);
                 cart.BookModel.ItemTotal = (cart.Count * cart.BookModel.Price);
                 cart.BookModel.ItemTotal = Math.Round(cart.BookModel.ItemTotal, 2);
+                CartVM.CartTotal = Math.Round(CartVM.CartTotal, 2);
             }
             return View(CartVM);
 
