@@ -61,7 +61,6 @@ namespace buyitWeb.Controllers
         [HttpPost]
         public IActionResult Add(CartModel cartModel)
         {
-
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             cartModel.ApplicationUserId = claim.Value;

@@ -27,11 +27,8 @@
                 <div>
                     <div class="mt-5 h4 shoppingcart">
                         Count:
-                        <input class="col-3" asp-for="Count" />
-                   
+                        <input class="col-3" min="1"  asp-for="Count" />                  
                             <button type="submit">Add to Cart</button>
-                        
-
                         <a asp-action="Index">Back</a>
                     </div>
                 </div>

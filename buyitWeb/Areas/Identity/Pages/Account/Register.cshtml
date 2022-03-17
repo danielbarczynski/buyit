@@ -12,67 +12,69 @@
 else{
 <h1 class="pt-4">@ViewData["Title"]</h1>
 }
-<div class="row pt-4">
-    <div class="col-md-7 ">
-        <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+<div>
+    <div>
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h2>Create a new account.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating py-2 col-12">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+            <div>
                 <label asp-for="Input.Email"></label>
+                <br />
+                <input asp-for="Input.Email" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-floating py-2 col-6">
-                <input asp-for="Input.Name" class="form-control"  aria-required="true" />
+            <div>
                 <label asp-for="Input.Name"></label>
+                <br />
+                <input asp-for="Input.Name"  aria-required="true" />
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
             
-            <div class="form-floating py-2 col-6">
-                <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" />
+            <div>
                 <label asp-for="Input.PhoneNumber"></label>
+                <br />
+                <input asp-for="Input.PhoneNumber" aria-required="true" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-floating py-2 col-6">
-                <input asp-for="Input.StreetAddress" class="form-control" aria-required="true" />
+            <div>
                 <label asp-for="Input.StreetAddress"></label>
+                <br />
+                <input asp-for="Input.StreetAddress" aria-required="true" />
                 <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
             </div>
-            <div class="form-floating py-2 col-6">
-                <input asp-for="Input.City" class="form-control" aria-required="true" />
+            <div>
                 <label asp-for="Input.City"></label>
+                <br />
+                <input asp-for="Input.City" aria-required="true" />
                 <span asp-validation-for="Input.City" class="text-danger"></span>
             </div>
-            <div class="form-floating py-2 col-6">
-                <input asp-for="Input.State" class="form-control"  aria-required="true" />
+            <div>
                 <label asp-for="Input.State"></label>
+                <br />
+                <input asp-for="Input.State"  aria-required="true" />
                 <span asp-validation-for="Input.State" class="text-danger"></span>
             </div>
-            <div class="form-floating py-2 col-6">
-                <input asp-for="Input.PostalCode" class="form-control"  aria-required="true" />
+            <div>
                 <label asp-for="Input.PostalCode"></label>
+                <br />
+                <input asp-for="Input.PostalCode"  aria-required="true" />
                 <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
             </div>
-            <div class="form-floating py-2 col-6">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+            <div>
                 <label asp-for="Input.Password"></label>
+                <br />
+                <input asp-for="Input.Password" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <div class="form-floating py-2 col-6">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+            <div>
                 <label asp-for="Input.ConfirmPassword"></label>
+                <br />
+                <input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            @if (User.IsInRole(Roles.Admin)){
-            <div class="form-floating py-2 col-6">
-                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class=form-select>
-                    <option disabled selected>-Select Role-</option>
-                </select>
-                
-            </div>
-            }
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-primary">Register</button>
+            <br />
+            <button id="registerSubmit" type="submit">Register</button>
         </form>
     </div>
 @if (User.IsInRole(Roles.Admin))

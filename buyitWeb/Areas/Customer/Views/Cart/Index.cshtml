@@ -16,7 +16,7 @@
                 <br />
                 <b>Price: </b>@item.BookModel.Price PLN
                 <br />
-                <b>Quantity: </b>@item.Count <a asp-action="Plus" asp-route-cartId="@item.Id">[+]</a><a asp-action="Minus" asp-route-cartId="@item.Id">[-]</a>
+                <b>Quantity: </b>@item.Count <a asp-action="Minus" asp-route-cartId="@item.Id">[-]</a> <a asp-action="Plus" asp-route-cartId="@item.Id">[+]</a>
                 <p>
                     <b>Total: </b>@item.BookModel.ItemTotal PLN
                     <form asp-action="Delete" asp-route-cartId="@item.Id"><button type="submit" class="h4">Delete</button></form>
@@ -24,11 +24,11 @@
             </div>
         }
     </div>
-    <div class="col-6 h2">
+    <div class="col-6 h3">
         <b>Total: </b>@Model.CartTotal PLN
         <p>
             <a asp-controller="Home" asp-action="Index">Back</a>
-            <button class="col-2 mt-2">Buy</button>
+            <button class="mt-2">Buy</button>
         </p>
     </div>
 </div>

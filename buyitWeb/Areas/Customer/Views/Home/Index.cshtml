@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<BookModel>
 
-
 <div class="row pb-3">
     @foreach (var book in Model)
     {
+        <input type="hidden" asp-for="@book.Id" />
         <div class="col-lg-3">
             <div class="row p-2">
                 <div class="col-12 p-1">
@@ -17,12 +17,7 @@
                             </div>
                             <div class="pl-1">
                                 <p>Price: <b>@book.Price.ToString("0.00") PLN</b></p>
-                            </div>
-                 @*           <form asp-controller="Home" asp-action="Add">                             
-                                <div class="text-center h5">
-                                    <button type="submit">Add to Cart</button>
-                                </div>
-                            </form>*@
+                            </div>                                
                         </div>
 
                     </div>
