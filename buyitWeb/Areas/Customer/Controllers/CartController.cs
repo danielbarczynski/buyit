@@ -1,4 +1,5 @@
-﻿using buyitWeb.Models.ViewModels;
+﻿using buyitWeb.Models;
+using buyitWeb.Models.ViewModels;
 using buyitWeb.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace buyitWeb.Areas.Customer.Controllers
                 properties: "BookModel"),
             };
 
-            foreach(var cart in CartVM.Cart)
+            foreach (var cart in CartVM.Cart)
             {
                 CartVM.CartTotal += (cart.Count * cart.BookModel.Price);
                 cart.BookModel.ItemTotal = (cart.Count * cart.BookModel.Price);
@@ -37,6 +38,36 @@ namespace buyitWeb.Areas.Customer.Controllers
             }
             return View(CartVM);
 
+        }
+        public IActionResult Plus(int cartId)
+        {
+            var cart = _unitOfWork.Cart.GetFirstOrDefault(u => u.Id == cartId);
+            _unitOfWork.Cart.IncrementCount(cart, 1);
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Minus(int cartId)
+        {
+            var cart = _unitOfWork.Cart.GetFirstOrDefault(u => u.Id == cartId);
+            if (cart.Count >= 2)
+            {
+                _unitOfWork.Cart.DecrementCount(cart, 1);
+            }
+            else
+            {
+                _unitOfWork.Cart.Remove(cart);
+            }
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int cartId)
+        {
+            var cart = _unitOfWork.Cart.GetFirstOrDefault(u => u.Id == cartId);
+            _unitOfWork.Cart.Remove(cart);
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

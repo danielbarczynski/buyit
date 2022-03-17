@@ -5,9 +5,9 @@
 
 <div class="container">
     <div class="row mb-3">
-        
-    @foreach (var item in Model.Cart)
-    {
+
+        @foreach (var item in Model.Cart)
+        {
             <div class="col-2">
                 <img src="@item.BookModel.ImageUrl" class="w-75" />
             </div>
@@ -16,18 +16,20 @@
                 <br />
                 <b>Price: </b>@item.BookModel.Price PLN
                 <br />
-                <b>Quantity: </b>@item.Count
-                <br /><br />
-                <p class="mt-3"><b>Total: </b>@item.BookModel.ItemTotal PLN</p>
-            </div>       
-    }
+                <b>Quantity: </b>@item.Count <a asp-action="Plus" asp-route-cartId="@item.Id">[+]</a><a asp-action="Minus" asp-route-cartId="@item.Id">[-]</a>
+                <p>
+                    <b>Total: </b>@item.BookModel.ItemTotal PLN
+                    <form asp-action="Delete" asp-route-cartId="@item.Id"><button type="submit" class="h4">Delete</button></form>
+                </p>
+            </div>
+        }
     </div>
     <div class="col-6 h2">
         <b>Total: </b>@Model.CartTotal PLN
         <p>
             <a asp-controller="Home" asp-action="Index">Back</a>
             <button class="col-2 mt-2">Buy</button>
-            </p>
+        </p>
     </div>
 </div>
 
