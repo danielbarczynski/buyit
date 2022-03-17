@@ -2,20 +2,36 @@
 
 <h1>Cart</h1>
 
-@foreach (var item in Model.Cart)
-{
+
+<div class="container">
     <div class="row mb-3">
-        <div class="col-2">
-            <img src="@item.BookModel.ImageUrl" class="w-75" />
-        </div>
-        <div class="col-4 h3 p-4">
-            Title: @item.BookModel.Title
-            <br />
-            Price: @item.BookModel.Price
-            <br />
-            Quantity: @item.Count
-            <br /><br />
-            Total price: 
-        </div>
+    @foreach (var item in Model.Cart)
+    {
+        
+            <div class="col-2">
+                <img src="@item.BookModel.ImageUrl" class="w-75" />
+            </div>
+            <div class="col-4 h3 p-4">
+                <b>Title: </b>@item.BookModel.Title
+                <br />
+                <b>Price: </b>@item.BookModel.Price PLN
+                <br />
+                <b>Quantity: </b>@item.Count
+                <br /><br />
+                <p class="mt-3"><b>Total: </b>@item.BookModel.ItemTotal PLN</p>
+            </div>
+        
+    }
     </div>
-}
+    <div class="col-6 h2">
+        <b>Total: </b>@Model.CartTotal PLN
+        <p>
+            <a asp-controller="Home" asp-action="Index">Back</a>
+            <button class="col-2 mt-2">Buy</button>
+            </p>
+    </div>
+</div>
+
+
+
+

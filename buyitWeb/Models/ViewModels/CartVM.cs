@@ -3,5 +3,6 @@
     public class CartVM
     {
         public IEnumerable<CartModel> Cart { get; set; }
+        public double CartTotal { get; set; }
     }
 }

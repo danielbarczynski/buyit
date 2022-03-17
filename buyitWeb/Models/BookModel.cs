@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace buyitWeb.Models
 {
@@ -22,5 +23,7 @@ namespace buyitWeb.Models
         public int CoverTypeId { get; set; }
         public CategoryModel Category { get; set; }
         public CoverTypeModel CoverType { get; set; }
+        [NotMapped]
+        public double ItemTotal { get; set; }
     }
 }

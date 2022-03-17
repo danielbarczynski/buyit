@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace buyitWeb.Models
 {
@@ -12,5 +13,7 @@ namespace buyitWeb.Models
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; }
+        [NotMapped]
+        public double Price { get; set; }
     }
 }

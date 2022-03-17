@@ -27,6 +27,13 @@ namespace buyitWeb.Areas.Customer.Controllers
                 Cart = _unitOfWork.Cart.GetAll(u => u.ApplicationUserId == claim.Value,
                 properties: "BookModel"),
             };
+
+            foreach(var cart in CartVM.Cart)
+            {
+                CartVM.CartTotal += (cart.Count * cart.BookModel.Price);
+                cart.BookModel.ItemTotal = (cart.Count * cart.BookModel.Price);
+                cart.BookModel.ItemTotal = Math.Round(cart.BookModel.ItemTotal, 2);
+            }
             return View(CartVM);
 
         }
