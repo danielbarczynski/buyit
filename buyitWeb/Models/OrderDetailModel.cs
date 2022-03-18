@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace buyitWeb.Models
 {
-    public class OrderDetail
+    public class OrderDetailModel
     {
         public int Id { get; set; }
         [Required]
         public int OrderId { get; set; }     
         [ValidateNever]
-        public OrderHeader OrderHeader { get; set; }
+        public OrderHeaderModel OrderHeader { get; set; }
         [Required]
         public int BookModelId { get; set; }
         [ValidateNever]

@@ -8,6 +8,8 @@ namespace buyitWeb.Repository
         ICoverType CoverType { get; }
         ICart Cart { get; }
         IBook Book { get; }
+        IOrderHeader OrderHeader { get; }
+        IOrderDetail OrderDetail { get; }
         void Save();
     }
 }

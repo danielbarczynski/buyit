@@ -63,7 +63,7 @@ namespace buyitWeb.Data.Migrations
 
                     b.HasIndex("CoverTypeId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("buyitWeb.Models.CartModel", b =>
@@ -89,7 +89,7 @@ namespace buyitWeb.Data.Migrations
 
                     b.HasIndex("BookModelId");
 
-                    b.ToTable("Cart");
+                    b.ToTable("Cart", (string)null);
                 });
 
             modelBuilder.Entity("buyitWeb.Models.CategoryModel", b =>
@@ -112,7 +112,7 @@ namespace buyitWeb.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("buyitWeb.Models.CoverTypeModel", b =>
@@ -129,7 +129,7 @@ namespace buyitWeb.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CoverTypes");
+                    b.ToTable("CoverTypes", (string)null);
                 });
 
             modelBuilder.Entity("buyitWeb.Models.OrderDetail", b =>
@@ -161,7 +161,7 @@ namespace buyitWeb.Data.Migrations
 
                     b.HasIndex("OrderHeaderId");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetails", (string)null);
                 });
 
             modelBuilder.Entity("buyitWeb.Models.OrderHeader", b =>
@@ -236,7 +236,7 @@ namespace buyitWeb.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("OrderHeaders");
+                    b.ToTable("OrderHeaders", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

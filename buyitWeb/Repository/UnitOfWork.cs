@@ -10,6 +10,8 @@ namespace buyitWeb.Repository
         public ICoverType CoverType { get; private set; }
         public IBook Book { get; private set; }
         public ICart Cart { get; private set; }
+        public IOrderHeader OrderHeader { get; private set; }
+        public IOrderDetail OrderDetail { get; private set; }
 
         public UnitOfWork(ApplicationDbContext applicationDbContext)
         {
@@ -18,6 +20,8 @@ namespace buyitWeb.Repository
             CoverType = new CoverType(_applicationDbContext);
             Book = new Book(_applicationDbContext);
             Cart = new Cart(_applicationDbContext);
+            OrderHeader = new OrderHeader(_applicationDbContext);
+            OrderDetail = new OrderDetail(_applicationDbContext);
         }
 
 
