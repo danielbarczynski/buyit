@@ -12,6 +12,7 @@ namespace buyitWeb.Repository
         public ICart Cart { get; private set; }
         public IOrderHeader OrderHeader { get; private set; }
         public IOrderDetail OrderDetail { get; private set; }
+        public IUser User { get; private set; }
 
         public UnitOfWork(ApplicationDbContext applicationDbContext)
         {
@@ -22,6 +23,7 @@ namespace buyitWeb.Repository
             Cart = new Cart(_applicationDbContext);
             OrderHeader = new OrderHeader(_applicationDbContext);
             OrderDetail = new OrderDetail(_applicationDbContext);
+            User = new User(_applicationDbContext);
         }
 
 

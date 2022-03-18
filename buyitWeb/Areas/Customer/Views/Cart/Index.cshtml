@@ -24,11 +24,14 @@
             </div>
         }
     </div>
-    <div class="col-6 h3">
-        <b>Total: </b>@Model.CartTotal PLN
-        <p>
+    <div class="col-6 h4">
+        <p class="h3"><b>Total: </b>@Model.OrderHeader.OrderTotal PLN</p>
+        <p class="mt-2">
             <a asp-controller="Home" asp-action="Index">Back</a>
-            <button class="mt-2">Buy</button>
+            @if (@Model.OrderHeader.OrderTotal > 0)
+            {
+                <a asp-action="Summary"><button>Next</button></a>
+            }
         </p>
     </div>
 </div>

@@ -27,14 +27,15 @@ namespace buyitWeb.Areas.Customer.Controllers
             {
                 Cart = _unitOfWork.Cart.GetAll(u => u.ApplicationUserId == claim.Value,
                 properties: "BookModel"),
+                OrderHeader = new(),
             };
 
             foreach (var cart in CartVM.Cart)
             {
-                CartVM.CartTotal += (cart.Count * cart.BookModel.Price);
+                CartVM.OrderHeader.OrderTotal += (cart.Count * cart.BookModel.Price);
                 cart.BookModel.ItemTotal = (cart.Count * cart.BookModel.Price);
                 cart.BookModel.ItemTotal = Math.Round(cart.BookModel.ItemTotal, 2);
-                CartVM.CartTotal = Math.Round(CartVM.CartTotal, 2);
+                CartVM.OrderHeader.OrderTotal = Math.Round(CartVM.OrderHeader.OrderTotal, 2);
             }
             return View(CartVM);
 
@@ -68,6 +69,37 @@ namespace buyitWeb.Areas.Customer.Controllers
             _unitOfWork.Cart.Remove(cart);
             _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Summary()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            CartVM = new CartVM()
+            {
+                Cart = _unitOfWork.Cart.GetAll(u => u.ApplicationUserId == claim.Value,
+                properties: "BookModel"),
+                OrderHeader = new()
+            };
+            CartVM.OrderHeader.ApplicationUser = _unitOfWork.User.GetFirstOrDefault(
+                u => u.Id == claim.Value);
+
+            CartVM.OrderHeader.Name = CartVM.OrderHeader.ApplicationUser.Name;
+            CartVM.OrderHeader.PhoneNumber = CartVM.OrderHeader.ApplicationUser.PhoneNumber;
+            CartVM.OrderHeader.StreetAddress = CartVM.OrderHeader.ApplicationUser.StreetAddress;
+            CartVM.OrderHeader.City = CartVM.OrderHeader.ApplicationUser.City;
+            CartVM.OrderHeader.State = CartVM.OrderHeader.ApplicationUser.State;
+            CartVM.OrderHeader.PostalCode = CartVM.OrderHeader.ApplicationUser.PostalCode;
+
+            foreach (var cart in CartVM.Cart)
+            {
+                CartVM.OrderHeader.OrderTotal += (cart.Count * cart.BookModel.Price);
+                cart.BookModel.ItemTotal = (cart.Count * cart.BookModel.Price);
+                cart.BookModel.ItemTotal = Math.Round(cart.BookModel.ItemTotal, 2);
+                CartVM.OrderHeader.OrderTotal = Math.Round(CartVM.OrderHeader.OrderTotal, 2);
+            }
+            return View(CartVM);
         }
     }
 }

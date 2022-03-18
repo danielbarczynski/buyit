@@ -10,6 +10,7 @@ namespace buyitWeb.Repository
         IBook Book { get; }
         IOrderHeader OrderHeader { get; }
         IOrderDetail OrderDetail { get; }
+        IUser User { get; }
         void Save();
     }
 }
