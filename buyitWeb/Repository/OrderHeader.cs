@@ -28,5 +28,11 @@ namespace buyitWeb.Repository
                 }
             }
         }
+        public void UpdateStripePaymentID(int id, string sessionId, string paymentIntentId)
+        {
+            var orderFromDb = _applicationDbContext.OrderHeaders.FirstOrDefault(u=>u.Id == id);
+            orderFromDb.SessionId = sessionId;
+            orderFromDb.PaymentIntentId = paymentIntentId;  
+        }
     }
 }
