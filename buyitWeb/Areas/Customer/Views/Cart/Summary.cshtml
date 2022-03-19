@@ -1,4 +1,6 @@
 ﻿@model buyitWeb.Models.ViewModels.CartVM
+@using Microsoft.Extensions.Options
+@inject IOptions<StripeSettings> Stripe
 
 <h1>Shipping details</h1>
 <form asp-controller="Cart" asp-action="SummaryPOST">
