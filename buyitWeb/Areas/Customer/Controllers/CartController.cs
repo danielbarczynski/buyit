@@ -101,5 +101,52 @@ namespace buyitWeb.Areas.Customer.Controllers
             }
             return View(CartVM);
         }
+
+        [HttpPost]
+        public IActionResult SummaryPOST()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            CartVM.Cart = _unitOfWork.Cart.GetAll(u => u.ApplicationUserId == claim.Value,
+            properties: "BookModel");
+
+            CartVM.OrderHeader.OrderDate = DateTime.Now;
+            CartVM.OrderHeader.ApplicationUserId = claim.Value;
+
+            foreach (var cart in CartVM.Cart)
+            {
+                CartVM.OrderHeader.OrderTotal += (cart.Count * cart.BookModel.Price);
+                cart.BookModel.ItemTotal = (cart.Count * cart.BookModel.Price);
+                cart.BookModel.ItemTotal = Math.Round(cart.BookModel.ItemTotal, 2);
+                CartVM.OrderHeader.OrderTotal = Math.Round(CartVM.OrderHeader.OrderTotal, 2);
+            }
+
+            ApplicationUser applicationUser = _unitOfWork.User.GetFirstOrDefault(u => u.Id == claim.Value);
+
+            CartVM.OrderHeader.PaymentStatus = Statuses.PaymentStatusPending;
+            CartVM.OrderHeader.OrderStatus = Statuses.StatusPending;
+
+            _unitOfWork.OrderHeader.Add(CartVM.OrderHeader);
+            _unitOfWork.Save();
+
+            foreach (var cart in CartVM.Cart)
+            {
+                OrderDetailModel orderDetail = new()
+                {
+                    BookModelId = cart.BookModelId,
+                    OrderId = CartVM.OrderHeader.Id,
+                    Price = cart.BookModel.Price,
+                    Count = cart.Count,
+                };
+                _unitOfWork.OrderDetail.Add(orderDetail);
+                _unitOfWork.Save();
+            }
+
+            _unitOfWork.Cart.RemoveRange(CartVM.Cart);
+            _unitOfWork.Save();
+
+            return RedirectToAction("Index","Home");
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model buyitWeb.Models.ViewModels.CartVM
 
 <h1>Shipping details</h1>
-<form>
+<form asp-controller="Cart" asp-action="SummaryPOST">
     <div class="h4">
         Name:
         <br />
@@ -33,15 +33,17 @@
         <input asp-for="OrderHeader.PostalCode" />
         <span asp-validation-for="OrderHeader.PostalCode"></span>
     </div>
+
+
+    <div class="mt-4 h4">
+        <p><b>Arrival Date:</b> @DateTime.Now.AddDays(5).ToShortDateString() - @DateTime.Now.AddDays(10).ToShortDateString()</p>
+        <p class="h3"><b>Total: </b>@Model.OrderHeader.OrderTotal PLN</p>
+
+        <a asp-action="Index">Back</a>
+        <button type="submit">Buy</button>
+
+    </div>
 </form>
-
-<div class="mt-4 h4">
-    <p><b>Arrival Date:</b> @DateTime.Now.AddDays(5).ToShortDateString() - @DateTime.Now.AddDays(10).ToShortDateString()</p> 
-    <p class="h3"><b>Total: </b>@Model.OrderHeader.OrderTotal PLN</p>
-    <a asp-action="Index">Back</a>
-    <button>Buy</button>
-</div>
-
 @section Scripts{
 @{
     <partial name="_ValidationScriptsPartial" />
