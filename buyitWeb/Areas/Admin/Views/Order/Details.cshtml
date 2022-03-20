@@ -1,104 +1,126 @@
 ﻿@model buyitWeb.Models.ViewModels.OrderVM
 
 <h1>Order nr: @Model.OrderHeader.Id </h1>
-<div class="row">
-<div class="col-6">
-    Name:
-    <br />
-    <input disabled asp-for="OrderHeader.PhoneNumber" />
-    <br />
-    Phone number:
-    <br />
-    <input asp-for="OrderHeader.PhoneNumber" />
-    <br />
-    Adress:
-    <br />
-    <input asp-for="OrderHeader.StreetAddress" />
-    <br />
-    City:
-    <br />
-    <input asp-for="OrderHeader.City" />
-    <br />
-    State:
-    <br />
-    <input asp-for="OrderHeader.State" />
-    <br />
-    Postal code:
-    <br />
-    <input asp-for="OrderHeader.PostalCode" />
-    <br />
-    Email:
-    <br />
-    <input asp-for="OrderHeader.ApplicationUser.Email" />
-    <br />
-    Order Date:
-    <br />
-    <input asp-for="OrderHeader.OrderDate" />
-    <br />
-    Carrier:
-    <br />
-    <input asp-for="OrderHeader.Carrier" />
-    <br />
-    Tracking number:
-    <br />
-    <input asp-for="OrderHeader.TrackingNumber" />
-    <br />
-    Shipping Date:
-    <br />
-    <input asp-for="OrderHeader.ShippingDate" />
-    <br />
-    Session ID:
-    <br />
-    <input asp-for="OrderHeader.SessionId" />
-    <br />
 
-    @if (Model.OrderHeader.SessionId == null)
-    {
-        <span> Payment Due To Date:</span>
-        <br />
-        <input value="@Model.OrderHeader.PaymentDueDate" />
-        <br />
-    }
-    <span> Payment Date:</span>
-    <br />
-    <input value="@Model.OrderHeader.PaymentDate" />
-    <br />
-    Payment Intent ID:
-    <br />
-    <input asp-for="OrderHeader.PaymentIntentId" />
-    <br />
-    Payment Status:
-    <br />
-    <input asp-for="OrderHeader.PaymentStatus" />
-</div>
-    <div class="col-6 h4">
-        <b>Order status:</b>
-        @Model.OrderHeader.OrderStatus
-        <br />
-        <b>Items:</b>       
-        @foreach(var item in Model.OrderDetail)
-        {
+<form method="post">
+    <input asp-for="OrderHeader.Id" hidden />
+    <div class="row">
+        <div class="col-6">
+            Name:
             <br />
-            @item.BookModel.Title <span>x</span>
-            @item.Count
-            
-        }
-        <br /><br />
-        <b>Total:</b>
-        @Model.OrderHeader.OrderTotal PLN
-        <br /><br />
-        @if (User.IsInRole("Admin"))
-        {
-            <button class="col-3">Start Proccessing</button>
+            <input asp-for="OrderHeader.PhoneNumber" />
+            <br />
+            Phone number:
+            <br />
+            <input asp-for="OrderHeader.PhoneNumber" />
+            <br />
+            Adress:
+            <br />
+            <input asp-for="OrderHeader.StreetAddress" />
+            <br />
+            City:
+            <br />
+            <input asp-for="OrderHeader.City" />
+            <br />
+            State:
+            <br />
+            <input asp-for="OrderHeader.State" />
+            <br />
+            Postal code:
+            <br />
+            <input asp-for="OrderHeader.PostalCode" />
+            <br />
+            Email:
+            <br />
+            <input asp-for="OrderHeader.ApplicationUser.Email" />
+            <br />
+            Order Date:
+            <br />
+            <input asp-for="OrderHeader.OrderDate" />
+            <br />
+            Carrier:
+            <br />
+            <input asp-for="OrderHeader.Carrier" />
+            <br />
+            Tracking number:
+            <br />
+            <input asp-for="OrderHeader.TrackingNumber" />
+            <br />
+            Shipping Date:
+            <br />
+            <input asp-for="OrderHeader.ShippingDate" />
+            <br />
+            Session ID:
+            <br />
+            <input asp-for="OrderHeader.SessionId" />
+            <br />
+
+            @if (Model.OrderHeader.SessionId == null)
+            {
+                <span> Payment Due To Date:</span>
+                <br />
+                <input value="@Model.OrderHeader.PaymentDueDate" />
+                <br />
+            }
+            <span> Payment Date:</span>
+            <br />
+            <input value="@Model.OrderHeader.PaymentDate" />
+            <br />
+            Payment Intent ID:
+            <br />
+            <input asp-for="OrderHeader.PaymentIntentId" />
+            <br />
+            Payment Status:
+            <br />
+            <input asp-for="OrderHeader.PaymentStatus" />
+        </div>
+        <div class="col-6 h4">
+            <b>Order status:</b>
+            @Model.OrderHeader.OrderStatus
             <br /><br />
-            <button class="col-3">Ship</button>
+            <b>Items:</b>
+            @foreach (var item in Model.OrderDetail)
+            {
+                <br />
+                @item.BookModel.Title
+                <span>(@item.BookModel.Price PLN) x</span>
+                @item.Count
+
+            }
             <br /><br />
-        }
-        @if (Model.OrderHeader.SessionId == null)
-        {
-            <button class="col-3">Pay</button>
+            <b>Total:</b>
+            @Model.OrderHeader.OrderTotal PLN
             <br /><br />
-        }
-        <button class="col-3">Cancel Order</button>
+
+            @if (User.IsInRole("Admin"))
+            {
+                @if (Model.OrderHeader.OrderStatus == Statuses.PaymentStatusApproved)
+                {
+                    <button asp-action="Process" type="submit" class="col-3">Process</button>
+                    <br />
+
+                    <br />
+                }
+                @if (Model.OrderHeader.OrderStatus == Statuses.StatusInProcess)
+                {
+                    <button class="col-3">Ship</button>
+                    <br />
+
+                    <br />
+                }
+            }
+            @if (Model.OrderHeader.PaymentStatus == Statuses.PaymentStatusDelayedPayment && Model.OrderHeader.OrderStatus == Statuses.StatusShipped)
+            {
+                <button class="col-3">Pay</button>
+                <br />
+
+                <br />
+            }
+            @if (Model.OrderHeader.PaymentStatus != Statuses.StatusRefunded || Model.OrderHeader.OrderStatus != Statuses.StatusCancelled)
+            {
+                <button class="col-3">Cancel Order</button>
+            }
+
+        </div>
     </div>
-</div>
+</form>

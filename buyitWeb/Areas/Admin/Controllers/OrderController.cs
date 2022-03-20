@@ -35,6 +35,13 @@ namespace buyitWeb.Areas.Admin.Controllers
 
             return View(OrderVM);
         }
+        [HttpPost]
+        public IActionResult Process()
+        {
+            _unitOfWork.OrderHeader.UpdateStatus(OrderVM.OrderHeader.Id, Statuses.StatusInProcess);
+            _unitOfWork.Save();
+            return RedirectToAction("Details", "Order", new { orderId = OrderVM.OrderHeader.Id});
+        }
 
         #region API CALLS
         [HttpGet]
