@@ -1,8 +1,8 @@
 ﻿@model buyitWeb.Models.ViewModels.OrderVM
 
 <h1>Order nr: @Model.OrderHeader.Id </h1>
-
-<div>
+<div class="row">
+<div class="col-6">
     Name:
     <br />
     <input disabled asp-for="OrderHeader.PhoneNumber" />
@@ -70,4 +70,35 @@
     Payment Status:
     <br />
     <input asp-for="OrderHeader.PaymentStatus" />
+</div>
+    <div class="col-6 h4">
+        <b>Order status:</b>
+        @Model.OrderHeader.OrderStatus
+        <br />
+        <b>Items:</b>       
+        @foreach(var item in Model.OrderDetail)
+        {
+            <br />
+            @item.BookModel.Title <span>x</span>
+            @item.Count
+            
+        }
+        <br /><br />
+        <b>Total:</b>
+        @Model.OrderHeader.OrderTotal PLN
+        <br /><br />
+        @if (User.IsInRole("Admin"))
+        {
+            <button class="col-3">Start Proccessing</button>
+            <br /><br />
+            <button class="col-3">Ship</button>
+            <br /><br />
+        }
+        @if (Model.OrderHeader.SessionId == null)
+        {
+            <button class="col-3">Pay</button>
+            <br /><br />
+        }
+        <button class="col-3">Cancel Order</button>
+    </div>
 </div>
