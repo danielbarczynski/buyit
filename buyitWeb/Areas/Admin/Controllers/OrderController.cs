@@ -29,11 +29,11 @@ namespace buyitWeb.Areas.Admin.Controllers
         {
             OrderVM = new OrderVM()
             {
-                OrderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u=>u.Id == orderId, properties:"ApplicationUser"),
-                OrderDetail = _unitOfWork.OrderDetail.GetAll(u=>u.OrderId==orderId, properties: "BookModel"),
+                OrderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == orderId, properties:"ApplicationUser"),
+                OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderId == orderId, properties: "BookModel"),
             };
 
-            return View();
+            return View(OrderVM);
         }
 
         #region API CALLS

@@ -1,1 +1,73 @@
-﻿
+﻿@model buyitWeb.Models.ViewModels.OrderVM
+
+<h1>Order nr: @Model.OrderHeader.Id </h1>
+
+<div>
+    Name:
+    <br />
+    <input disabled asp-for="OrderHeader.PhoneNumber" />
+    <br />
+    Phone number:
+    <br />
+    <input asp-for="OrderHeader.PhoneNumber" />
+    <br />
+    Adress:
+    <br />
+    <input asp-for="OrderHeader.StreetAddress" />
+    <br />
+    City:
+    <br />
+    <input asp-for="OrderHeader.City" />
+    <br />
+    State:
+    <br />
+    <input asp-for="OrderHeader.State" />
+    <br />
+    Postal code:
+    <br />
+    <input asp-for="OrderHeader.PostalCode" />
+    <br />
+    Email:
+    <br />
+    <input asp-for="OrderHeader.ApplicationUser.Email" />
+    <br />
+    Order Date:
+    <br />
+    <input asp-for="OrderHeader.OrderDate" />
+    <br />
+    Carrier:
+    <br />
+    <input asp-for="OrderHeader.Carrier" />
+    <br />
+    Tracking number:
+    <br />
+    <input asp-for="OrderHeader.TrackingNumber" />
+    <br />
+    Shipping Date:
+    <br />
+    <input asp-for="OrderHeader.ShippingDate" />
+    <br />
+    Session ID:
+    <br />
+    <input asp-for="OrderHeader.SessionId" />
+    <br />
+
+    @if (Model.OrderHeader.SessionId == null)
+    {
+        <span> Payment Due To Date:</span>
+        <br />
+        <input value="@Model.OrderHeader.PaymentDueDate" />
+        <br />
+    }
+    <span> Payment Date:</span>
+    <br />
+    <input value="@Model.OrderHeader.PaymentDate" />
+    <br />
+    Payment Intent ID:
+    <br />
+    <input asp-for="OrderHeader.PaymentIntentId" />
+    <br />
+    Payment Status:
+    <br />
+    <input asp-for="OrderHeader.PaymentStatus" />
+</div>
