@@ -42,7 +42,7 @@ function loadDataTable(status) {
                 "data": "id",
                 "render": function (data) {
                     return `
-                        <button onClick=Details('/Admin/Order/Details?orderId=${data}')>Details</buttton>
+                        <a href="/Admin/Order/Details?orderId=${data}"><button>Details</button></a>
                         `
                 },
                 "width": "15%"
