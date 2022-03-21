@@ -1,5 +1,6 @@
 ﻿using buyitWeb.Models;
 using buyitWeb.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace buyitWeb.Controllers
@@ -15,13 +16,13 @@ namespace buyitWeb.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Index()
         {
             IEnumerable<CoverTypeModel> coverTypes = _unitOfWork.CoverType.GetAll();
             return View(coverTypes);
         }
-
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public IActionResult Create()
         {
@@ -29,7 +30,7 @@ namespace buyitWeb.Controllers
             _unitOfWork.Save();
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public IActionResult Delete()
         {

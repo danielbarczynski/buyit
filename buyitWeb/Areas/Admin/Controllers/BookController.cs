@@ -4,6 +4,7 @@ using buyitWeb.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace buyitWeb.Controllers
 {
@@ -20,13 +21,14 @@ namespace buyitWeb.Controllers
             _unitOfWork = unitOfWork;
             _hostEnvironment = hostEnvironment;
         }
-
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Index()
         {
             //IEnumerable<BookModel> coverTypes = _unitOfWork.Book.GetAll();
             //return View(coverTypes);
             return View();
         }
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Create()
         {
             BookVM bookVM = new BookVM()
@@ -47,7 +49,7 @@ namespace buyitWeb.Controllers
             //ViewBag.covers = covers;
             return View(bookVM);
         }
-
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public IActionResult Create(BookVM bookVM, IFormFile file)
         {
@@ -78,7 +80,7 @@ namespace buyitWeb.Controllers
             var books = _unitOfWork.Book.GetAll(properties:"Category,CoverType");
             return Json(new { data = books });
         }
-
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete]
         public IActionResult Delete(int id)
         {

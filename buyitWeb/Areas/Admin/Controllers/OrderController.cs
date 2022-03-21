@@ -37,6 +37,7 @@ namespace buyitWeb.Areas.Admin.Controllers
             return View(OrderVM);
         }
         [HttpPost]
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Process()
         {
             _unitOfWork.OrderHeader.UpdateStatus(OrderVM.OrderHeader.Id, Statuses.StatusInProcess);
@@ -44,6 +45,7 @@ namespace buyitWeb.Areas.Admin.Controllers
             return RedirectToAction("Details", "Order", new { orderId = OrderVM.OrderHeader.Id});
         }
         [HttpPost]
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Ship()
         {
             var orderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == OrderVM.OrderHeader.Id);
