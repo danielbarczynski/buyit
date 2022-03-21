@@ -164,7 +164,7 @@ namespace buyitWeb.Areas.Customer.Controllers
                 {
                     PriceData = new SessionLineItemPriceDataOptions
                     {
-                        UnitAmount = (long)(item.BookModel.Price * 100),//20.00 -> 2000
+                        UnitAmount = (long)(item.BookModel.Price * 100),
                         Currency = "pln",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {

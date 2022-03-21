@@ -111,14 +111,14 @@
                     <br />
                 }
             }
-            @if (Model.OrderHeader.PaymentStatus == Statuses.PaymentStatusDelayedPayment && Model.OrderHeader.OrderStatus == Statuses.StatusShipped)
+            @if (Model.OrderHeader.PaymentStatus == Statuses.StatusPending)
             {
-                <button class="col-3">Pay</button>
+                <button type="submit" asp-action="Pay" class="col-3" >Pay</button>
                 <br />
 
                 <br />
             }
-            @if (Model.OrderHeader.PaymentStatus != Statuses.StatusRefunded && Model.OrderHeader.OrderStatus != Statuses.StatusCancelled)
+            @if (Model.OrderHeader.OrderStatus != Statuses.StatusCancelled && Model.OrderHeader.OrderStatus != Statuses.StatusShipped)
             {
                 <button type="submit" asp-action="Cancel" class="col-3">Cancel Order</button>
             }
