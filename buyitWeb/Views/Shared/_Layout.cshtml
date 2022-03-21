@@ -17,7 +17,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
             <div class="container">
                 @*without fluid*@
-                <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">buyit</a>
+                <a class="navbar-brand">buyit</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -35,13 +35,17 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
                                 <a class="dropdown-item" asp-area="Admin" asp-controller="CoverType" asp-action="Index">Covers</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Book" asp-action="Index">Books</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Order" asp-action="Index">Orders</a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Book" asp-action="Index">Books</a>                                
                             </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
                                 Cart
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">
+                                Orders
                             </a>
                         </li>
                     </ul>

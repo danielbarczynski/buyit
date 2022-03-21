@@ -42,6 +42,30 @@ namespace buyitWeb.Areas.Admin.Controllers
             _unitOfWork.Save();
             return RedirectToAction("Details", "Order", new { orderId = OrderVM.OrderHeader.Id});
         }
+        [HttpPost]
+        public IActionResult Ship()
+        {
+            var orderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == OrderVM.OrderHeader.Id);
+            orderHeader.TrackingNumber = OrderVM.OrderHeader.TrackingNumber;
+            orderHeader.Carrier = OrderVM.OrderHeader.Carrier;
+            orderHeader.OrderStatus = Statuses.StatusShipped;
+            orderHeader.ShippingDate = DateTime.Now;
+            if (orderHeader.PaymentStatus == Statuses.PaymentStatusDelayedPayment)
+            {
+                orderHeader.PaymentDueDate = DateTime.Now.AddDays(7);
+            }
+            _unitOfWork.OrderHeader.Update(orderHeader);
+            _unitOfWork.Save();
+            return RedirectToAction("Details", "Order", new { orderId = OrderVM.OrderHeader.Id });
+        }
+
+        public IActionResult Cancel()
+        {
+            var orderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == OrderVM.OrderHeader.Id);
+            _unitOfWork.OrderHeader.UpdateStatus(orderHeader.Id, Statuses.StatusCancelled, Statuses.StatusCancelled);
+            _unitOfWork.Save();
+            return RedirectToAction("Details", "Order", new { orderId = OrderVM.OrderHeader.Id });
+        }
 
         #region API CALLS
         [HttpGet]

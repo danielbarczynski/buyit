@@ -2,77 +2,79 @@
 
 <h1>Order nr: @Model.OrderHeader.Id </h1>
 
+
+
 <form method="post">
     <input asp-for="OrderHeader.Id" hidden />
     <div class="row">
         <div class="col-6">
             Name:
             <br />
-            <input asp-for="OrderHeader.PhoneNumber" />
+            <input disabled asp-for="OrderHeader.PhoneNumber" />
             <br />
             Phone number:
             <br />
-            <input asp-for="OrderHeader.PhoneNumber" />
+            <input disabled asp-for="OrderHeader.PhoneNumber" />
             <br />
             Adress:
             <br />
-            <input asp-for="OrderHeader.StreetAddress" />
+            <input disabled asp-for="OrderHeader.StreetAddress" />
             <br />
             City:
             <br />
-            <input asp-for="OrderHeader.City" />
+            <input disabled asp-for="OrderHeader.City" />
             <br />
             State:
             <br />
-            <input asp-for="OrderHeader.State" />
+            <input disabled asp-for="OrderHeader.State" />
             <br />
             Postal code:
             <br />
-            <input asp-for="OrderHeader.PostalCode" />
+            <input disabled asp-for="OrderHeader.PostalCode" />
             <br />
             Email:
             <br />
-            <input asp-for="OrderHeader.ApplicationUser.Email" />
+            <input disabled asp-for="OrderHeader.ApplicationUser.Email" />
             <br />
             Order Date:
             <br />
-            <input asp-for="OrderHeader.OrderDate" />
+            <input disabled asp-for="OrderHeader.OrderDate" />
             <br />
             Carrier:
             <br />
-            <input asp-for="OrderHeader.Carrier" />
+            <input id="carrier" asp-for="OrderHeader.Carrier" />
             <br />
             Tracking number:
             <br />
-            <input asp-for="OrderHeader.TrackingNumber" />
+            <input id="trackingNumber" asp-for="OrderHeader.TrackingNumber" />
             <br />
             Shipping Date:
             <br />
-            <input asp-for="OrderHeader.ShippingDate" />
+            <input disabled asp-for="OrderHeader.ShippingDate" />
             <br />
             Session ID:
             <br />
-            <input asp-for="OrderHeader.SessionId" />
+            <input disabled asp-for="OrderHeader.SessionId" />
             <br />
 
             @if (Model.OrderHeader.SessionId == null)
             {
                 <span> Payment Due To Date:</span>
                 <br />
-                <input value="@Model.OrderHeader.PaymentDueDate" />
+                <input disabled value="@Model.OrderHeader.PaymentDueDate" />
                 <br />
             }
             <span> Payment Date:</span>
             <br />
-            <input value="@Model.OrderHeader.PaymentDate" />
+            <input disabled value="@Model.OrderHeader.PaymentDate" />
             <br />
             Payment Intent ID:
             <br />
-            <input asp-for="OrderHeader.PaymentIntentId" />
+            <input disabled asp-for="OrderHeader.PaymentIntentId" />
             <br />
             Payment Status:
             <br />
-            <input asp-for="OrderHeader.PaymentStatus" />
+            <input disabled asp-for="OrderHeader.PaymentStatus" />
         </div>
         <div class="col-6 h4">
             <b>Order status:</b>
@@ -103,7 +105,7 @@
                 }
                 @if (Model.OrderHeader.OrderStatus == Statuses.StatusInProcess)
                 {
-                    <button class="col-3">Ship</button>
+                    <button type="submit" asp-action="Ship" class="col-3" id="ship">Ship</button>
                     <br />
 
                     <br />
@@ -116,11 +118,15 @@
 
                 <br />
             }
-            @if (Model.OrderHeader.PaymentStatus != Statuses.StatusRefunded || Model.OrderHeader.OrderStatus != Statuses.StatusCancelled)
+            @if (Model.OrderHeader.PaymentStatus != Statuses.StatusRefunded && Model.OrderHeader.OrderStatus != Statuses.StatusCancelled)
             {
-                <button class="col-3">Cancel Order</button>
+                <button type="submit" asp-action="Cancel" class="col-3">Cancel Order</button>
             }
 
         </div>
     </div>
 </form>
+
+@section Scripts{
+<script src="~/js/validatiooon.js"></script>
+}
