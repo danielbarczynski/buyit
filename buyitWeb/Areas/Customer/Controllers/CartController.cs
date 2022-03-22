@@ -2,6 +2,7 @@
 using buyitWeb.Models.ViewModels;
 using buyitWeb.Repository;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
 using System.Security.Claims;
@@ -12,12 +13,15 @@ namespace buyitWeb.Areas.Customer.Controllers
     [Authorize]
     public class CartController : Controller
     {
+        private readonly IEmailSender _emailSender;
         private readonly IUnitOfWork _unitOfWork;
         [BindProperty]
         public CartVM CartVM { get; set; }
-        public CartController(IUnitOfWork unitOfWork)
+        
+        public CartController(IUnitOfWork unitOfWork, IEmailSender emailSender)
         {
             _unitOfWork = unitOfWork;
+            _emailSender = emailSender;
         }
         public IActionResult Index()
         {
@@ -205,6 +209,7 @@ namespace buyitWeb.Areas.Customer.Controllers
                     _unitOfWork.Save();
                 }
             }
+            _emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "New Order", "<p>New Order Created</p>");
             List<CartModel> shoppingCarts = _unitOfWork.Cart.GetAll(u => u.ApplicationUserId ==
             orderHeader.ApplicationUserId).ToList();
             _unitOfWork.Cart.RemoveRange(shoppingCarts);
