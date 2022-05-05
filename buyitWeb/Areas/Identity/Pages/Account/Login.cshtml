@@ -15,7 +15,7 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating">
                     <div>Email:</div>
-                    <input asp-for="Input.Email" autocomplete="username" aria-required="true" />                   
+                    <input asp-for="Input.Email" autocomplete="username" aria-required="true" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
                 <div class="form-floating">
@@ -35,7 +35,7 @@
                     <button id="login-submit" type="submit">Log in</button>
                 </div>
                 <div>
-                    <p>
+                    <p class="mt-2">
                         <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
                     <p>
@@ -48,38 +48,88 @@
             </form>
         </section>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    @*<div class="col-md-6 col-md-offset-2">
         <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
+        <h3>Use another service to log in.</h3>
+        <hr />
+        @{
+        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+        {
+        <div>
+        <p>
+        There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+        article
+        about setting up this ASP.NET application to support logging in via external services
+        </a>.
+        </p>
+        </div>
+        }
+        else
+        {
+        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+        <div>
+        <p>
+        @foreach (var provider in Model.ExternalLogins)
+        {
+        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+        }
+        </p>
+        </div>
+        </form>
+        }
+        }
+
         </section>
+        <div class="row" style="font-size: 20px;">
+        <div class="col-4 ">
+        <div class="border border-primary p-3">
+        <b>Admin account:</b>
+        <br /><br />
+        Email: admin@admin.com
+        <br />
+        Password: Admin123!
+        </div>
+        </div>
+
+        <div class="col-4">
+        <div class="border border-primary p-3">
+        <b>User account:</b>
+        <br /><br />
+        Email: user@user.com
+        <br />
+        Password: User123!
+        </div>
+        </div>
+        </div>
+        </div>*@
+    <div>
+        <h3>Problem with logging in?</h3>
+        <p>It's probably a bug because you are already logged in. <a asp-area="Identity" asp-page="/Account/Manage/Index"><u>Click here</u></a></p>
+    </div>
+
+    <div class="row" style="font-size: 20px;">
+        <div class="col-4 ">
+            <div class="border border-primary p-3">
+                <b>Admin account:</b>
+                <br /><br />
+                Email: admin@admin.com
+                <br />
+                Password: Admin123!
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="border border-primary p-3">
+                <b>User account:</b>
+                <br /><br />
+                Email: user@user.com
+                <br />
+                Password: User123!
+            </div>
+        </div>
     </div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }
