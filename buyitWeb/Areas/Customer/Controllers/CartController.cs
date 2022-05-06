@@ -214,7 +214,6 @@ namespace buyitWeb.Areas.Customer.Controllers
             orderHeader.ApplicationUserId).ToList();
             _unitOfWork.Cart.RemoveRange(shoppingCarts);
             _unitOfWork.Save();
-
             return View(id);
         }
     }
