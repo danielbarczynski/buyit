@@ -17,7 +17,7 @@ namespace buyitWeb.Areas.Customer.Controllers
         private readonly IUnitOfWork _unitOfWork;
         [BindProperty]
         public CartVM CartVM { get; set; }
-        
+
         public CartController(IUnitOfWork unitOfWork, IEmailSender emailSender)
         {
             _unitOfWork = unitOfWork;
